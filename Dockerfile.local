@@ -1,0 +1,11 @@
+FROM golang:1.27-alpine
+
+# Air watches *.go files, rebuilds and restarts the app.
+RUN go install github.com/air-verse/air@v1.67.4
+
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+
+# The source is bind-mounted by docker-compose.dev.yml, so it is not copied here.
+CMD ["air", "-c", ".air.toml"]

@@ -1,0 +1,12 @@
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  cmd = "go build -o /tmp/api ./cmd/api"
+  entrypoint = ["/tmp/api"]
+  include_ext = ["go"]
+  exclude_dir = ["tmp", ".git", ".idea", "docs"]
+  delay = 300
+  # Send SIGINT first so the graceful shutdown in main.go runs.
+  send_interrupt = true
+  kill_delay = "5s"

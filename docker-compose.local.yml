@@ -1,0 +1,14 @@
+# Override file: always used together with docker-compose.yml (see `make run-local`).
+# It swaps the api service to the Air-based local image with the source mounted.
+services:
+  api:
+    build:
+      dockerfile: Dockerfile.local
+    volumes:
+      - .:/app
+      - go_mod_cache:/go/pkg/mod
+      - go_build_cache:/root/.cache/go-build
+
+volumes:
+  go_mod_cache:
+  go_build_cache:
